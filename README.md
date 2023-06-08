@@ -24,6 +24,7 @@ PDF-to-GPT is a FastAPI application that leverages OpenAI's GPT model to generat
 1. Start the FastAPI server:
 
    ```bash
+   source env/bin/activate
    uvicorn main:app --reload
 
 2. Open your browser and navigate to http://localhost:8000 to access the application.
