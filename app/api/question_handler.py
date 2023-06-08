@@ -1,8 +1,10 @@
 import logging
 from fastapi import HTTPException
 from app.utils.openai_utils import generate_chatgpt_response
+from app.api.context_handler import get_context
 
 async def ask_question(question):
+    context = get_context()
     if not context:
         raise HTTPException(status_code=400, detail="Please upload a PDF file first.")
 
