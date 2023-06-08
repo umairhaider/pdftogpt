@@ -29,6 +29,11 @@ PDF-to-GPT is a FastAPI application that leverages OpenAI's GPT model to generat
 
 2. Open your browser and navigate to http://localhost:8000 to access the application.
 
+1. Running the tests:
+
+   ```bash
+   pytest -m order
+
 ## API Endpoints
 
 1. POST /upload_pdf/: Upload a PDF file to generate a summary.
