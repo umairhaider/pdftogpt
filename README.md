@@ -49,6 +49,27 @@ PDF-to-GPT is a FastAPI application that leverages OpenAI's GPT model to generat
 
 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
 
+## Code Contribution rules
+
+Git commit message should follow the following rules:
+
+Add the following approved tags while pushing the commits:
+
+feat – a new feature is introduced with the changes
+fix – a bug fix has occurred
+chore – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+refactor – refactored code that neither fixes a bug nor adds a feature
+docs – updates to documentation such as a the README or other markdown files
+style – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+test – including new or correcting previous tests
+perf – performance improvements
+ci – continuous integration related
+build – changes that affect the build system or external dependencies
+revert – reverts a previous commit
+example: feat: add JWT headers to login API fix: bug preventing Firefox users to login
+
+Merge and PR: Before creating a PR squash all the commits into one.
+
 ## License
 
 This project is licensed under the MIT License.
