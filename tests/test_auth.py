@@ -7,8 +7,8 @@ from main import app
 
 client = TestClient(app)
 
-username = os.environ.get("USERNAME_SECRET")
-password = os.environ.get("PASSWORD_SECRET")
+username = os.getenv("USERNAME_SECRET")
+password = os.getenv("PASSWORD_SECRET")
 
 @pytest.fixture(scope="module")
 def access_token():

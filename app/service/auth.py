@@ -8,9 +8,9 @@ from app.models.user import User
 
 security = HTTPBearer()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-ALGORITHM = os.environ.get("AUTH_ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")
-SECRET_KEY = os.environ.get("SECRET_KEY")
+ALGORITHM = os.getenv("AUTH_ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 def authenticate_user(username: str, password: str):
     # TODO: Implement a proper authentication mechanism
