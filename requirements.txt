@@ -5,3 +5,5 @@ openai
 httpx
 pytest
 python-multipart
+pyjwt
+passlib
