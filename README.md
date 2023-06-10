@@ -35,7 +35,8 @@ PDF-to-GPT is a FastAPI application that leverages OpenAI's GPT model to generat
 
 ## API Endpoints
 
-1. POST /upload_pdf/: Upload a PDF file to generate a summary.
+1. POST api/v1/signin/: Get JWT tokens to access the other endpoints.
+2. POST api/v1/upload_pdf/: Upload a PDF file to generate a summary.
 3. POST /ask_question/: Ask a question about the uploaded PDF and get an answer.
 
 ## Technologies Used
