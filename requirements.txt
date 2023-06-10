@@ -4,3 +4,4 @@ pdfplumber
 openai
 httpx
 pytest
+python-multipart
