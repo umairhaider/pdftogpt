@@ -1,17 +1,16 @@
 import pytest
 from fastapi.testclient import TestClient
 import os
-import time
 
 from main import app
 
 client = TestClient(app)
 
-username = os.getenv("USERNAME_SECRET")
-password = os.getenv("PASSWORD_SECRET")
 
 @pytest.fixture(scope="module")
 def access_token():
+    username = os.getenv("USERNAME_SECRET")
+    password = os.getenv("PASSWORD_SECRET")
     response = client.post("api/v1/signin/", data={"username": username, "password": password})
     assert response.status_code == 200
     access_token = response.json()["access_token"]
@@ -19,6 +18,8 @@ def access_token():
 
 @pytest.mark.order(5)
 def test_sign_in_success():
+    username = os.getenv("USERNAME_SECRET")
+    password = os.getenv("PASSWORD_SECRET")
     response = client.post("api/v1/signin/", data={"username": username, "password": password})
     assert response.status_code == 200
     assert "access_token" in response.json()
