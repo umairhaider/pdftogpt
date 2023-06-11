@@ -16,13 +16,8 @@ PDF-to-GPT is a FastAPI application that leverages OpenAI's GPT model to generat
    git clone https://github.com/umairhaider/pdftogpt.git
    
 2. Install the dependencies
-   PROD:
    ```bash
    pip install -r requirements.txt
-
-   DEV:
-   ```bash
-   pip install -r requirements-dev.txt
 
 
 ## Usage
