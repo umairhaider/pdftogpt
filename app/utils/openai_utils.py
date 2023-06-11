@@ -9,12 +9,12 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 if openai.api_key is None:
     raise Exception("Please set your OPENAI_API_KEY as an environment variable.")
 
-def generate_chatgpt_response(prompt):
+def generate_chatgpt_response(prompt, max_tokens=100):
     try:
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt,
-            max_tokens=100,
+            max_tokens=max_tokens,
             n=1,
             stop=None,
             temperature=0.7

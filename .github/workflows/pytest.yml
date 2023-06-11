@@ -24,6 +24,7 @@ jobs:
 
       - name: Run tests
         env:
+          CI: true
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Access OPENAI_API_KEY from secrets
           USERNAME_SECRET: ${{ vars.USERNAME_SECRET }}  # Access USERNAME_SECRET from variables
           PASSWORD_SECRET: ${{ vars.PASSWORD_SECRET }}  # Access PASSWORD_SECRET from variables

@@ -1,5 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file only in local development
+if os.getenv("CI") is None:
+    # Set the ENVIRONMENT variable to "development"
+    os.environ["ENVIRONMENT"] = "development"
+    load_dotenv()
 
 from app.api.routes import router as api_router
 

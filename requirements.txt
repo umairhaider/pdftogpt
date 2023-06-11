@@ -7,3 +7,5 @@ pytest
 python-multipart
 pyjwt
 passlib
+python-pptx
+python-dotenv
