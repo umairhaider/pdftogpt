@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -26,9 +29,15 @@ jobs:
         env:
           CI: true
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Access OPENAI_API_KEY from secrets
-          USERNAME_SECRET: ${{ vars.USERNAME_SECRET }}  # Access USERNAME_SECRET from variables
-          PASSWORD_SECRET: ${{ vars.PASSWORD_SECRET }}  # Access PASSWORD_SECRET from variables
-          AUTH_ALGORITHM: ${{ vars.AUTH_ALGORITHM }}  # Access AUTH_ALGORITHM from variables
-          ACCESS_TOKEN_EXPIRE_MINUTES: ${{ vars.ACCESS_TOKEN_EXPIRE_MINUTES }}  # Access ACCESS_TOKEN_EXPIRE_MINUTES from variables
+          USERNAME_SECRET: ${{ vars.USERNAME_SECRET }}  # Access USERNAME_SECRET from secrets
+          PASSWORD_SECRET: ${{ vars.PASSWORD_SECRET }}  # Access PASSWORD_SECRET from secrets
+          AUTH_ALGORITHM: ${{ vars.AUTH_ALGORITHM }}  # Access AUTH_ALGORITHM from secrets
+          ACCESS_TOKEN_EXPIRE_MINUTES: ${{ vars.ACCESS_TOKEN_EXPIRE_MINUTES }}  # Access ACCESS_TOKEN_EXPIRE_MINUTES from secrets
           SECRET_KEY: ${{ secrets.SECRET_KEY }}  # Access SECRET_KEY from secrets
-        run: pytest
+        run: pytest -m order --cov=app --cov-report=xml
+
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          file: coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}  # Access CODECOV_TOKEN from secrets
