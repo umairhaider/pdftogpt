@@ -1,9 +1,9 @@
-import logging
 from fastapi import APIRouter, UploadFile, Form, File, HTTPException, Depends
+from fastapi.responses import StreamingResponse
 from app.models.user import User
 from app.api import pdf_handler, question_handler
 from app.service.auth import authenticate_user, create_access_token, get_current_user
-from fastapi.security import OAuth2PasswordRequestForm
+from app.service.pptx_hander import generate_presentation
 
 router = APIRouter()
 
@@ -15,7 +15,6 @@ async def sign_in(username: str = Form(...), password: str = Form(...)):
     Parameters:
     - username: The username for authentication.
     - password: The password for authentication.
-    - current_user: The authenticated user object.
 
     Returns:
     - A dictionary containing the access_token and token_type.
@@ -58,3 +57,21 @@ async def ask_question(question: str, current_user: User = Depends(get_current_u
     if not current_user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     return await question_handler.ask_question(question)
+
+@router.post("/get_presentation/")
+async def get_presentation(current_user: User = Depends(get_current_user)):
+    """
+    Get a PPTX presentation based on the PDF context.
+
+    Returns:
+    - The response containing the generated answer.
+    """
+    # Ensure the user is authenticated
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    output_file = await generate_presentation()
+
+    return StreamingResponse(open(output_file, "rb"),
+                             media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                             headers={"Content-Disposition": "attachment; filename=presentation.pptx"})
