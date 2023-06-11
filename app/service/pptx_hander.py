@@ -18,7 +18,6 @@ async def generate_presentation():
         response_str = generate_chatgpt_response(prompt, max_tokens=1000)
         json_start_index = response_str.index('"slides":')
         json_string = "{"+response_str[json_start_index:]# Extract the JSON string from the response
-        print("******************", json_string)
         json_pptx = json.loads(json_string)
         return process_presentation(json_pptx)
     except Exception as e:
