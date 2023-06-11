@@ -9,3 +9,4 @@ pyjwt
 passlib
 python-pptx
 python-dotenv
+pytest-cov
