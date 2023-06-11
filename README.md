@@ -6,7 +6,7 @@
 </p>
 <p align="center">
 <a href="https://github.com/umairhaider/pdftogpt/actions/workflows/pytest.yml" target="_blank">
-    <img src="https://img.shields.io/github/actions/workflow/status/umairhaider/pdftogpt/pytest.yml" alt="Test">
+    <img src="https://img.shields.io/github/actions/workflow/status/umairhaider/pdftogpt/pytest.yml?branch=main" alt="Build">
 </a>
 <a href="https://codecov.io/gh/umairhaider/pdftogpt" > 
  <img src="https://codecov.io/gh/umairhaider/pdftogpt/branch/main/graph/badge.svg?token=AOMLSUAO3A"/> 
