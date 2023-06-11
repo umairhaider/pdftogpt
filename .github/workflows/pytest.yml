@@ -26,10 +26,10 @@ jobs:
         env:
           CI: true
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Access OPENAI_API_KEY from secrets
-          USERNAME_SECRET: ${{ secrets.USERNAME_SECRET }}  # Access USERNAME_SECRET from secrets
-          PASSWORD_SECRET: ${{ secrets.PASSWORD_SECRET }}  # Access PASSWORD_SECRET from secrets
-          AUTH_ALGORITHM: ${{ secrets.AUTH_ALGORITHM }}  # Access AUTH_ALGORITHM from secrets
-          ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}  # Access ACCESS_TOKEN_EXPIRE_MINUTES from secrets
+          USERNAME_SECRET: ${{ vars.USERNAME_SECRET }}  # Access USERNAME_SECRET from secrets
+          PASSWORD_SECRET: ${{ vars.PASSWORD_SECRET }}  # Access PASSWORD_SECRET from secrets
+          AUTH_ALGORITHM: ${{ vars.AUTH_ALGORITHM }}  # Access AUTH_ALGORITHM from secrets
+          ACCESS_TOKEN_EXPIRE_MINUTES: ${{ vars.ACCESS_TOKEN_EXPIRE_MINUTES }}  # Access ACCESS_TOKEN_EXPIRE_MINUTES from secrets
           SECRET_KEY: ${{ secrets.SECRET_KEY }}  # Access SECRET_KEY from secrets
         run: pytest -m order --cov=app --cov-report=xml
 
