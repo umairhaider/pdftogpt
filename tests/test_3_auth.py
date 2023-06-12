@@ -34,7 +34,7 @@ def test_sign_in_invalid_credentials():
 @pytest.mark.order(7)
 def test_jwt_token_validation(access_token):
     # Upload a PDF file first (ensure this test runs after the upload test)
-    with open("test.pdf", "rb") as f:
+    with open("tests/test.pdf", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
       

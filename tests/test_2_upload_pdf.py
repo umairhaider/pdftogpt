@@ -18,7 +18,7 @@ def access_token():
 @pytest.mark.order(3)
 def test_03_upload_pdf_valid(access_token):
     # Create a sample PDF file object for testing
-    with open("test.pdf", "rb") as f:
+    with open("tests/test.pdf", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
     
@@ -28,7 +28,7 @@ def test_03_upload_pdf_valid(access_token):
 @pytest.mark.order(4)
 def test_04_upload_pdf_invalid(access_token):
     # Create a sample non-PDF file object for testing
-    with open("test.txt", "rb") as f:
+    with open("tests/test.txt", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
     
