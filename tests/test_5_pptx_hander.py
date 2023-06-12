@@ -6,7 +6,6 @@ from app.service.pptx_hander import process_presentation
 
 client = TestClient(app)
 
-@pytest.mark.order(12)
 def test_process_presentation_with_dict_data():
     json_data = {
         "slides": [
@@ -23,7 +22,6 @@ def test_process_presentation_with_dict_data():
     output_file = process_presentation(json_data)
     assert output_file == "presentation.pptx"
 
-@pytest.mark.order(13)
 def test_process_presentation_with_list_data():
     json_data = [
         {
@@ -38,7 +36,6 @@ def test_process_presentation_with_list_data():
     output_file = process_presentation(json_data)
     assert output_file == "presentation.pptx"
 
-@pytest.mark.order(14)
 def test_process_presentation_with_invalid_data():
     json_data = "invalid"
     with pytest.raises(ValueError) as e:

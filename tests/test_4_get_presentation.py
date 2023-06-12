@@ -23,16 +23,6 @@ def access_token():
     access_token = response.json()["access_token"]
     yield access_token
 
-@pytest.mark.order(9)
-def test_get_presentation_no_pdf_invalid(access_token):
-    # Test PPTX without uploading a PDF file first
-    response = client.post("api/v1/get_presentation/",
-                           headers={"Authorization": f"Bearer {access_token}"})
-    
-    assert response.status_code == 400
-    assert "detail" in response.json()
-
-@pytest.mark.order(10)
 def test_get_presentation_valid(access_token):
     # Upload a PDF file first (ensure this test runs after the upload test)
     with open("test.pdf", "rb") as f:
@@ -51,7 +41,14 @@ def test_get_presentation_valid(access_token):
     assert response.headers["Content-Type"] == "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     assert "presentation.pptx" in response.headers["Content-Disposition"]
 
-@pytest.mark.order(11)
+def test_get_presentation_no_pdf_invalid(access_token):
+    # Test PPTX without uploading a PDF file first
+    response = client.post("api/v1/get_presentation/",
+                           headers={"Authorization": f"Bearer {access_token}"})
+    
+    assert response.status_code == 400
+    assert "detail" in response.json()
+
 def test_get_presentation_endpoint_unauthenticated():
     # Assuming the user is not authenticated
     response = client.post("api/v1/get_presentation/")
