@@ -16,7 +16,6 @@ def access_token():
     access_token = response.json()["access_token"]
     yield access_token
 
-@pytest.mark.order(5)
 def test_sign_in_success():
     username = os.getenv("USERNAME_SECRET")
     password = os.getenv("PASSWORD_SECRET")
@@ -25,13 +24,11 @@ def test_sign_in_success():
     assert "access_token" in response.json()
     assert "token_type" in response.json()
 
-@pytest.mark.order(6)
 def test_sign_in_invalid_credentials():
     response = client.post("api/v1/signin/", data={"username": "unclebob", "password": "cleancode"})
     assert response.status_code == 401
     assert "detail" in response.json()
 
-@pytest.mark.order(7)
 def test_jwt_token_validation(access_token):
     # Upload a PDF file first (ensure this test runs after the upload test)
     with open("tests/test.pdf", "rb") as f:
@@ -41,7 +38,6 @@ def test_jwt_token_validation(access_token):
     assert response.status_code == 200
     assert "text" in response.json()
 
-@pytest.mark.order(8)
 def test_jwt_token_invalid():
     response = client.post("api/v1/ask_question/?question=What is the main idea of the document?",
                            headers={"Authorization": f"Bearer invalidToken"})
