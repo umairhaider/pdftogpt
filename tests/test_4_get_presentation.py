@@ -4,15 +4,15 @@ import pytest
 import os
 from main import app
 import time
-from app.api.context_handler import get_context, set_context
+from app.api.knowledgebase_handler import get_knowledge_base, set_knowledge_base
 
 client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def reset_context():
-    set_context("")  # Reset the context to an empty string
+    set_knowledge_base(None)  # Reset the context to an empty string
     yield  # Yield to allow the test to run
-    set_context("")  # Reset the context again after the test completes
+    set_knowledge_base(None)  # Reset the context again after the test completes
 
 @pytest.fixture(scope="module")
 def access_token():
