@@ -1,7 +1,6 @@
 fastapi
 uvicorn
 pdfplumber
-openai
 httpx
 pytest
 python-multipart
@@ -10,3 +9,7 @@ passlib
 python-pptx
 python-dotenv
 pytest-cov
+langchain
+tiktoken
+faiss-cpu
+openai
