@@ -1,6 +1,13 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from app.utils import langchain_utils
+from app.api.knowledgebase_handler import set_knowledge_base
+
+@pytest.fixture(autouse=True)
+def reset_context():
+    set_knowledge_base(None)  # Reset the context to an empty string
+    yield  # Yield to allow the test to run
+    set_knowledge_base(None)  # Reset the context again after the test completes
 
 def test_process_file_context_exception():
     """

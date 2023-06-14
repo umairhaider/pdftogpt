@@ -12,3 +12,4 @@ pytest-cov
 langchain
 tiktoken
 faiss-cpu
+openai
