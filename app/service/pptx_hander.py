@@ -2,7 +2,7 @@ import logging
 from fastapi import HTTPException
 import json
 from pptx import Presentation
-from app.api.knowledgebase_handler import get_knowledge_base
+from app.service.knowledgebase_handler import get_knowledge_base
 from app.utils.langchain_utils import process_user_question
 
 async def generate_presentation():

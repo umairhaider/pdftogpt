@@ -7,7 +7,7 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
-from app.api.knowledgebase_handler import get_knowledge_base, set_knowledge_base
+from app.service.knowledgebase_handler import get_knowledge_base, set_knowledge_base
 
 # Configure OpenAI API credentials
 def set_openai_key():
