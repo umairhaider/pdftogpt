@@ -1,6 +1,6 @@
 import logging
 from fastapi import HTTPException
-from app.api.knowledgebase_handler import get_knowledge_base
+from app.service.knowledgebase_handler import get_knowledge_base
 from app.utils.langchain_utils import process_user_question
 
 

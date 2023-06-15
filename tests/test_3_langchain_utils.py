@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from app.utils import langchain_utils
-from app.api.knowledgebase_handler import set_knowledge_base
+from app.service.knowledgebase_handler import set_knowledge_base
 
 @pytest.fixture(autouse=True)
 def reset_context():
