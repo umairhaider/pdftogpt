@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from app.utils import langchain_utils
 from app.service.knowledgebase_handler import set_knowledge_base
 

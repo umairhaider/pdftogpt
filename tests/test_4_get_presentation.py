@@ -1,10 +1,9 @@
 from fastapi.testclient import TestClient
-from fastapi import HTTPException
 import pytest
 import os
 from main import app
 import time
-from app.service.knowledgebase_handler import get_knowledge_base, set_knowledge_base
+from app.service.knowledgebase_handler import set_knowledge_base
 
 client = TestClient(app)
 

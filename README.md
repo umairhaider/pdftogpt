@@ -42,7 +42,7 @@
    ```bash
    uvicorn main:app --reload
 
-3. Open your browser and navigate to http://localhost:8000 to access the application.
+3. Open your browser and navigate to http://localhost:8000/docs to access the application.
 
 4. Running the tests:
 

@@ -1,4 +1,7 @@
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
+from unittest.mock import patch, MagicMock
+from app.service import question_handler
 import time
 import pytest
 import os
@@ -42,3 +45,20 @@ def test_ask_question_valid(access_token):
     assert response.status_code == 200
     assert "question" in response.json()
     assert "answer" in response.json()
+
+@pytest.mark.asyncio
+@patch("app.service.question_handler.process_user_question")
+@patch("app.service.question_handler.get_knowledge_base")
+async def test_ask_question_exception(mock_get_knowledge_base, mock_process_user_question):
+    """
+    Test that ask_question function raises an exception when an error occurs.
+    """
+    mock_get_knowledge_base.return_value = MagicMock()
+    user_question = "Sample question"
+    mock_process_user_question.side_effect = Exception("Unexpected error")
+
+    with pytest.raises(HTTPException) as e_info:
+        await question_handler.ask_question(user_question)
+
+    assert e_info.value.status_code == 500
+    assert e_info.value.detail == "Unexpected error"
