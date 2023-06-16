@@ -54,7 +54,12 @@ def validate_json_data_structure(json_data):
     if not isinstance(json_data, (dict, list)):
         raise ValueError("Invalid JSON data format")
 
-    slides = json_data.get("slides", []) if isinstance(json_data, dict) else json_data
+    if isinstance(json_data, dict):
+        slides = json_data.get("slides")
+        if slides is None:
+            raise ValueError("Missing 'slides' field in slide data")
+    else:
+        slides = json_data
 
     for slide_data in slides:
         if not isinstance(slide_data, dict):

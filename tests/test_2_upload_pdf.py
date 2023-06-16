@@ -1,4 +1,7 @@
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
+from unittest.mock import patch, MagicMock
+import app.service.pdf_handler as pdf_handler
 import pytest
 import os
 from main import app
@@ -43,3 +46,19 @@ def test_upload_pdf_with_pages_valid(access_token):
     assert response.status_code == 200
     assert "text" in response.json()
     assert "generated_text" in response.json()
+
+@pytest.mark.asyncio
+@patch("pdfplumber.open")
+async def test_generate_presentation_exception(mock_open):
+    """
+    Test that generate_presentation function does not raise an exception when a valid context is available.
+    """
+    file = MagicMock()
+    file.content_type = "application/pdf"
+    mock_open.side_effect = Exception("Unexpected error")
+
+    with pytest.raises(HTTPException) as e_info:
+        await pdf_handler.upload_pdf(file)
+
+    assert e_info.value.status_code == 500
+    assert e_info.value.detail == "Unexpected error"
