@@ -19,7 +19,7 @@ def access_token():
 
 def test_upload_pdf_valid(access_token):
     # Create a sample PDF file object for testing
-    with open("tests/test.pdf", "rb") as f:
+    with open("backend/tests/test.pdf", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
     
@@ -29,7 +29,7 @@ def test_upload_pdf_valid(access_token):
 
 def test_upload_pdf_invalid(access_token):
     # Create a sample non-PDF file object for testing
-    with open("tests/test.txt", "rb") as f:
+    with open("backend/tests/test.txt", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
     
@@ -39,7 +39,7 @@ def test_upload_pdf_invalid(access_token):
 
 def test_upload_pdf_with_pages_valid(access_token):
     # Create a sample PDF file object for testing
-    with open("tests/test_multiple_valid.pdf", "rb") as f:
+    with open("backend/tests/test_multiple_valid.pdf", "rb") as f:
         response = client.post("api/v1/upload_pdf/", files={"file": f},
                                headers={"Authorization": f"Bearer {access_token}"})
     

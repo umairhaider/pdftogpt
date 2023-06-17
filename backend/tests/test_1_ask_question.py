@@ -31,7 +31,7 @@ def test_ask_question_invalid(access_token):
     
 def test_ask_question_valid(access_token):
     # Upload a PDF file first (ensure this test runs after the upload test)
-    with open("tests/test.pdf", "rb") as f:
+    with open("backend/tests/test.pdf", "rb") as f:
         client.post("api/v1/upload_pdf/", files={"file": f},
                            headers={"Authorization": f"Bearer {access_token}"})
     
