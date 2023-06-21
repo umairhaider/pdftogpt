@@ -7,7 +7,7 @@ from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
-from app.service.knowledgebase_handler import get_knowledge_base, set_knowledge_base
+from app.service.knowledgebase_handler import get_knowledge_base, set_knowledge_base, set_app_context, get_memory, get_prompt
 
 # Configure OpenAI API credentials
 def set_openai_key():
@@ -16,6 +16,10 @@ def set_openai_key():
 # If the API key is not set, raise an exception
 if openai.api_key is None:
     raise Exception("Please set your OPENAI_API_KEY as an environment variable.")
+
+# Setup the context for the knowledge base
+set_app_context()
+
 
 def process_file_context(file_text):
     try:
@@ -46,10 +50,10 @@ def process_user_question(user_question):
         if user_question:
             docs = knowledge_base.similarity_search(user_question)
             
-            llm = OpenAI()
-            chain = load_qa_chain(llm, chain_type="stuff")
+            llm = OpenAI(temperature=0, max_tokens=100)
+            chain = load_qa_chain(llm, chain_type="stuff", memory=get_memory(), prompt=get_prompt())
             with get_openai_callback() as cb:
-                response = chain.run(input_documents=docs, question=user_question)
+                response = chain({"input_documents": docs, "human_input": user_question}, return_only_outputs=True)
                 print(cb)
 
             return response
