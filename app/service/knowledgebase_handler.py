@@ -27,6 +27,16 @@ def set_app_context():
         input_key="human_input")
         prompt = PromptTemplate(input_variables=["chat_history", "human_input", "context"], template=template)
 
+def reset_app_context():
+    global memory
+    global prompt
+    global knowledge_base
+    memory = None
+    prompt = None
+    knowledge_base = None
+    set_app_context()
+
+
 def get_memory():
     return memory
 
