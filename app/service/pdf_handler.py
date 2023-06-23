@@ -3,7 +3,6 @@ import pdfplumber
 from fastapi import HTTPException
 from app.utils.langchain_utils import process_file_context, process_user_question
 from app.service.file_handler import upload_file
-from app.service.knowledgebase_handler import reset_app_context
 
 async def upload_pdf(file):
     if file.content_type != "application/pdf":
