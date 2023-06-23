@@ -15,7 +15,9 @@ knowledge_base = None
 memory = None
 prompt = None
 
+chunks = None
 
+# Setup the context for the knowledge base
 def set_app_context():
     global memory
     global prompt
@@ -27,6 +29,7 @@ def set_app_context():
         input_key="human_input")
         prompt = PromptTemplate(input_variables=["chat_history", "human_input", "context"], template=template)
 
+# Reset the context for the knowledge base
 def reset_app_context():
     global memory
     global prompt
@@ -36,7 +39,7 @@ def reset_app_context():
     knowledge_base = None
     set_app_context()
 
-
+# Getters and setters for the knowledge base
 def get_memory():
     return memory
 
@@ -45,6 +48,13 @@ def get_prompt():
 
 def get_knowledge_base():
     return knowledge_base
+
+def get_chunks():
+    return chunks
+
+def set_chunks(new_chunks):
+    global chunks
+    chunks = new_chunks
 
 def set_knowledge_base(new_context):
     global knowledge_base
