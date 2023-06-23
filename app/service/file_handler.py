@@ -15,6 +15,10 @@ async def upload_file(file: UploadFile = File(...)):
 
     # Construct the new filename
     new_filename = f"{original_filename}_{random_string}{file_extension}"
+
+    # Create folder if it doesn't exist
+    if not os.path.exists("uploads"):
+        os.makedirs("uploads")
     
     # Save the file to the "uploads" folder
     save_path = os.path.join("uploads", new_filename)
