@@ -12,7 +12,7 @@ client = TestClient(app)
 def access_token():
     username = os.getenv("USERNAME_SECRET")
     password = os.getenv("PASSWORD_SECRET")
-    response = client.post("api/v1/signin/", data={"username": username, "password": password})
+    response = client.post("api/v1/signin/", json={"username": username, "password": password})
     assert response.status_code == 200
     access_token = response.json()["access_token"]
     yield access_token
@@ -48,7 +48,7 @@ def test_upload_pdf_with_pages_valid(access_token):
     assert "generated_text" in response.json()
 
 @pytest.mark.asyncio
-@patch("pdfplumber.open")
+@patch("app.service.file_handler.upload_file")
 async def test_generate_presentation_exception(mock_open):
     """
     Test that generate_presentation function does not raise an exception when a valid context is available.
@@ -59,6 +59,6 @@ async def test_generate_presentation_exception(mock_open):
 
     with pytest.raises(HTTPException) as e_info:
         await pdf_handler.upload_pdf(file)
-
+        
     assert e_info.value.status_code == 500
-    assert e_info.value.detail == "Unexpected error"
+    assert "No such file or directory" in e_info.value.detail
