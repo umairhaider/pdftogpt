@@ -11,7 +11,7 @@ client = TestClient(app)
 def access_token():
     username = os.getenv("USERNAME_SECRET")
     password = os.getenv("PASSWORD_SECRET")
-    response = client.post("api/v1/signin/", data={"username": username, "password": password})
+    response = client.post("api/v1/signin/", json={"username": username, "password": password})
     assert response.status_code == 200
     access_token = response.json()["access_token"]
     yield access_token
@@ -19,13 +19,13 @@ def access_token():
 def test_sign_in_success():
     username = os.getenv("USERNAME_SECRET")
     password = os.getenv("PASSWORD_SECRET")
-    response = client.post("api/v1/signin/", data={"username": username, "password": password})
+    response = client.post("api/v1/signin/", json={"username": username, "password": password})
     assert response.status_code == 200
     assert "access_token" in response.json()
     assert "token_type" in response.json()
 
 def test_sign_in_invalid_credentials():
-    response = client.post("api/v1/signin/", data={"username": "unclebob", "password": "cleancode"})
+    response = client.post("api/v1/signin/", json={"username": "unclebob", "password": "cleancode"})
     assert response.status_code == 401
     assert "detail" in response.json()
 

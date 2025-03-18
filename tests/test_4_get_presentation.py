@@ -17,7 +17,7 @@ def reset_context():
 def access_token():
     username = os.getenv("USERNAME_SECRET")
     password = os.getenv("PASSWORD_SECRET")
-    response = client.post("api/v1/signin/", data={"username": username, "password": password})
+    response = client.post("api/v1/signin/", json={"username": username, "password": password})
     assert response.status_code == 200
     access_token = response.json()["access_token"]
     yield access_token
