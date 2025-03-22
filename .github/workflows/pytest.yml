@@ -23,7 +23,7 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
 
       - name: Run tests
         env:
@@ -34,7 +34,7 @@ jobs:
           AUTH_ALGORITHM: ${{ vars.AUTH_ALGORITHM }}  # Access AUTH_ALGORITHM from secrets
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{ vars.ACCESS_TOKEN_EXPIRE_MINUTES }}  # Access ACCESS_TOKEN_EXPIRE_MINUTES from secrets
           SECRET_KEY: ${{ secrets.SECRET_KEY }}  # Access SECRET_KEY from secrets
-        run: pytest --cov=app --cov-report=xml
+        run: pytest --cov=backend/app --cov-report=xml
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v2
